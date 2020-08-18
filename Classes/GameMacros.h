@@ -1,0 +1,162 @@
+//
+//  GameMacros.h
+//  Side Scroller
+//
+//  Created by Rahul Iyer
+//
+//
+
+// namespace rahuliyer {}
+#ifdef __cplusplus
+#define NS_RIY_BEGIN                     namespace rahuliyer {
+#define NS_RIY_END                       }
+#define USING_NS_RIY                     using namespace rahuliyer
+#else
+#endif
+
+#ifndef Farterson_GameMacros_h
+#define Farterson_GameMacros_h
+//#define COCOS2D_DEBUG 0
+#define NUM_PREV_VELS   30
+#define PTM_RATIO 32
+
+typedef enum _entityCategory{
+
+    NOTHING_PHYSICS_CATEGORY        =    0x0000,
+    PLAYER_PHYSICS_CATEGORY         =    0x0001,
+    GROUND_PHYSICS_CATEGORY         =    0x0002,
+    OBSTRUCTION_PHYSICS_CATEGORY    =    0x0004,
+    EATABLE_PHYSICS_CATEGORY        =    0x0008,
+    SCORE_NODE_PHYSICS_CATEGORY     =    0x0010,
+    PLAYER_SENSOR_PHYSICS_CATEGORY  =    0x0020,
+
+}PHYSICS_OBJECT_CATEGORY;
+
+typedef enum _collidableType{
+    GROUND_COLLIDABLE_TYPE = 0,
+    PLAYER_COLLIDABLE_TYPE,
+    OBSTRUCTION_COLLIDABLE_TYPE,
+    SCORE_COLLIDABLE_TYPE,
+    FLOWERJET_COLLIDABLE_TYPE,
+    BAD_FOOD_COLLIDABLE_TYPE,
+    BOSS_COLLIDABLE_TYPE,
+    UPPER_KILL_COLLIDABLE_TYPE,
+    ONE_UP_COLLIDABLE_TYPE,
+    SKIP_LEVEL_COLLIDABLE_TYPE,
+    PARTICLE_COLLIDABLE_TYPE,
+}COLLIDABLE_TYPE;
+
+typedef enum _obstructionType{
+
+    NON_OBSTRUCTION_TYPE        =    0,
+    TREE1_OBSTRUCTION_TYPE,
+}OBSTRUCTION_TYPE;
+
+typedef enum _eatableType{
+
+    ONION_EATABLE_TYPE        =    0,
+
+}EATABLE_TYPE;
+
+typedef enum _badFoodType{
+
+    BAD_PIZZA_FOOD_TYPE        =    0,
+
+}BAD_FOOD_TYPE;
+
+typedef enum _bossType{
+    NO_BOSS = 0,
+    BOSS_PIZZA_TYPE,
+
+}BOSS_TYPE;
+
+typedef enum _spriteZOrder{
+    NOTHING_Z_ORDER = 100,
+    TEAR_FIX_SPRITE_Z_ORDER,
+    HIDDEN_BACKGROUND_SPRITE_Z_ORDER,
+    BACKGROUND_SPRITE_Z_ORDER,
+    STAR_SPRITE_Z_ORDER,
+    SUN_SPRITE_Z_ORDER,
+    MOON_SPRITE_Z_ORDER,
+    CLOUD_SPRITE_Z_ORDER,
+    AABOVE_GROUND_SPRITE_Z_ORDER,
+    ABOVE_GROUND_SPRITE_Z_ORDER,
+    OBSTRUCTION_SPRITE_Z_ORDER,
+    HIDDEN_GROUND_SPRITE_Z_ORDER,
+    AGROUND_SPRITE_Z_ORDER,
+    GROUND_SPRITE_Z_ORDER,
+    EATABLE_SPRITE_Z_ORDER,
+    BAD_FOOD_SPRITE_Z_ORDER,
+    FLOWERJET_SPRITE_Z_ORDER,
+    BOSS_SPRITE_Z_ORDER,
+    PARTICLE_EXPLOSION_Z_ORDER,
+    PLAYER_SPRITE_Z_ORDER,
+    WEATHER_Z_ORDER,
+    INSTRUCTION_SPRITE_Z_ORDER,
+    MENU_BACK_Z_ORDER,
+    MENU_Z_ORDER,
+    SCORE_LABEL_Z_ORDER,
+}SPRITE_Z_ORDER;
+
+typedef enum _bossState{
+    BOSS_NON_STATE = 0,
+
+    BOSS_ENTERING_STATE,
+    BOSS_ENTERED_WAITING_STATE,
+    BOSS_ADJUSTING_HEIGHT_STATE,
+    BOSS_CHARGING_STATE,
+    BOSS_WAITING_AFTER_CHARGING_STATE,
+    BOSS_RETREATING_STATE,
+    BOSS_FIRING_STATE,
+
+}BOSS_STATE;
+
+typedef enum _actionTags{
+    TINT_ACTION_TAG = 0,
+}ACTION_TAG;
+
+
+typedef enum _contactType{
+
+    PLAYER_OBSTRUCTION_CONTACT_EVENT        =    0,
+    PLAYER_GROUND_MAKE_CONTACT_EVENT,
+    PLAYER_GROUND_BREAK_CONTACT_EVENT,
+    PLAYER_CONTACT_SCORE_NODE_BETWEEN_OBSTRUCTIONS_EVENT,
+
+}CONTACT_EVENT_TYPE;
+
+typedef enum _obstructionGroupChoice{
+
+    IGNORED_FIRST_OBSTRUCTION_GROUND_CHOICE = 0, //This is not used either. Just to make looping easy
+    LONE_DOWN_OBSTRUCTION_GROUP_CHOICE,
+    LONE_UP_OBSTRUCTION_GROUP_CHOICE,
+    PAIR_OBSTRUCTION__GROUP_CHOICE,
+    BAD_FOOD_PAIR_OBSTRUCTION_GROUP_CHOICE,
+    PAIR_BAD_FOOD_WITHOUT_TREES_GROUP_CHOICE,
+    SINGLE_BAD_FOOD_JUMPING_FROM_GROUND_AND_TREE_ABOVE_CHOICE,
+    SAVE_GAME_OBSTRUCTION_GROUP_CHOICE,
+    SKIP_GAME_OBSTRUCTION_GROUP_CHOICE,
+
+    IGNORED_OBSTRUCTION_GROUP_CHOICE, //This is not used. Just to make looping easy
+
+}OBSTRUCTION_GROUP_CHOICE;
+
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#include <vector>
+#include <string>
+#include <sstream>
+#endif
+
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+namespace std
+{
+    template < typename T > std::string to_string( const T& n )
+    {
+        std::ostringstream ss;
+        ss << n ;
+        return ss.str() ;
+    }
+}
+#endif
+
+#endif
